@@ -1,0 +1,17 @@
+name: update content
+
+on: push
+
+jobs:
+  update:
+    name: Update content
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout the site
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+      - name: retrieve private data
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+        with:
+          repository: mgwalker/private-data-test
+          path: __data
+      - run: ls -lsa __data
