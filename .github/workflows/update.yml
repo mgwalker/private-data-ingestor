@@ -13,5 +13,6 @@ jobs:
         uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
         with:
           repository: mgwalker/private-data-test
+          ref: main
           path: __data
       - run: ls -lsa __data
