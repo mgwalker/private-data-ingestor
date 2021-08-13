@@ -15,5 +15,5 @@ jobs:
           path: __data
           repository: mgwalker/private-data-test
           ref: main
-          token: ${{ secrets.PRIVATE_GITHUB_KEY }}
+          token: ${{ secrets.PRIVATE_GITHUB_TOKEN }}
       - run: ls -lsa __data
