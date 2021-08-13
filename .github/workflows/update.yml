@@ -16,4 +16,21 @@ jobs:
           repository: mgwalker/private-data-test
           ref: main
           token: ${{ secrets.PRIVATE_GITHUB_TOKEN }}
-      - run: ls -lsa __data
+      - name: move private data into place
+        run: |
+          rm -rf interviews
+          rm -rf questions
+          mv __data/* .
+      - uses: actions/setup-node@d6e3b5539ed7e5ccd26c3459e26c7c817f4e9068
+        with:
+          node-version: 14
+      - run: npm install
+      - run: npm run build
+      - name: move to GitHub pages
+        run: |
+          rm -rf docs
+          mv public docs
+      - name: commit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./.github/workflows/git.sh

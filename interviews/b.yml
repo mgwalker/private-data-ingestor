@@ -1,0 +1,21 @@
+slug: b
+title: Interview B
+
+sections:
+  - name: Section B.1
+    questions:
+      - q2
+      - q1
+      - q2
+      - q2
+
+  - name: Section B.2
+    questions:
+      - q1
+      - q2
+
+  - name: Section B.3
+    questions:
+      - q2
+      - q1
+      - q1

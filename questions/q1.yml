@@ -1,0 +1,13 @@
+id: q1
+text: SAMPLE QUESTION 1
+follow ups:
+  - follow up 1.1
+  - follow up 1.2
+  - follow up 1.3
+great:
+  - great sign 1.1
+  - great sign 1.2
+warning:
+  - warning sign 1.1
+  - warning sign 1.2
+  - warning sign 1.3
