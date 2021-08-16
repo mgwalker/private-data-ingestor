@@ -3,6 +3,7 @@ title: Interview A
 
 sections:
   - name: Section A.1
+    description: Description of the purpose of section A.1
     questions:
       - q1
       - q2

@@ -16,18 +16,16 @@ const headingStyles = {
 
 // markup
 const IndexPage = ({ data: { interviews: data } }) => {
-  console.log(data);
-
   return (
     <main style={pageStyles}>
       <title>{data.title}</title>
       <h1 style={headingStyles}>{data.title}</h1>
       {data.sections.map(({ description, name, questions }) => (
         <>
-          {description}
           <h2>{name}</h2>
+          {description}
           {questions.map((q) => (
-            <Question key={q} q={q} />
+            <Question q={q} full />
           ))}
         </>
       ))}

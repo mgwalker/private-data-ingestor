@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 
-const Question = ({ q }) => {
+const Question = ({ q, full = false }) => {
   const question = useStaticQuery(graphql`
     query MyQuery {
       allQuestions {
@@ -17,7 +17,7 @@ const Question = ({ q }) => {
   `)
     .allQuestions.nodes.filter(({ id }) => id === q)
     .pop();
-  console.log(question);
+  console.log(full);
 
   return (
     <div>
@@ -28,36 +28,38 @@ const Question = ({ q }) => {
           <li>{t}</li>
         ))}
       </ul>
-      <table>
-        <thead>
-          <tr>
-            <td>
-              <strong>✅ Great signs:</strong>
-            </td>
-            <td>
-              <strong>⚠️ Warning signs: </strong>
-            </td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <ul>
-                {question.great.map((t) => (
-                  <li>{t}</li>
-                ))}
-              </ul>
-            </td>
-            <td>
-              <ul>
-                {question.warning.map((t) => (
-                  <li>{t}</li>
-                ))}
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      {full ? (
+        <table>
+          <thead>
+            <tr>
+              <td>
+                <strong>✅ Great signs:</strong>
+              </td>
+              <td>
+                <strong>⚠️ Warning signs: </strong>
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <ul>
+                  {question.great.map((t) => (
+                    <li>{t}</li>
+                  ))}
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  {question.warning.map((t) => (
+                    <li>{t}</li>
+                  ))}
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      ) : null}
     </div>
   );
 };
