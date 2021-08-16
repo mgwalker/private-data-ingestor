@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useStaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql, Link } from "gatsby";
 
 // styles
 const pageStyles = {
@@ -12,51 +12,46 @@ const headingStyles = {
   marginBottom: 64,
   maxWidth: 320,
 };
-const headingAccentStyles = {
-  color: "#663399",
-};
-const paragraphStyles = {
-  marginBottom: 48,
-};
-const codeStyles = {
-  color: "#8A6534",
-  padding: 4,
-  backgroundColor: "#FFF4DB",
-  fontSize: "1.25rem",
-  borderRadius: 4,
-};
 
 // markup
 const IndexPage = () => {
-  const data = useStaticQuery(graphql`
-    query SiteTitle {
+  const interviews = useStaticQuery(graphql`
+    query IndexPage {
       allInterviews {
         nodes {
+          id
           title
         }
       }
     }
-  `);
-  console.log(data);
+  `)
+    .allInterviews.nodes.map(({ id, title }) => ({ id, title }))
+    .sort(({ title: a }, { title: b }) => {
+      if (a < b) {
+        return -1;
+      }
+      if (a > b) {
+        return 1;
+      }
+      return 0;
+    });
 
   return (
     <main style={pageStyles}>
       <title>Home Page</title>
-      <h1 style={headingStyles}>
-        Congratulations
-        <br />
-        <span style={headingAccentStyles}>— you just made a Gatsby site! </span>
-        <span role="img" aria-label="Party popper emojis">
-          🎉🎉🎉
-        </span>
-      </h1>
-      <p style={paragraphStyles}>
-        Edit <code style={codeStyles}>src/pages/index.js</code> to see this page
-        update in real-time.{" "}
-        <span role="img" aria-label="Sunglasses smiley emoji">
-          😎
-        </span>
-      </p>
+      <h1 style={headingStyles}>Interviews</h1>
+      <ul>
+        {interviews.map(({ id, title }) => (
+          <li key={id}>
+            <Link to={`/interviews/${title.toLowerCase().replace(" ", "-")}`}>
+              {title}
+            </Link>{" "}
+            <Link to={`/private/${title.toLowerCase().replace(" ", "-")}`}>
+              (private)
+            </Link>
+          </li>
+        ))}
+      </ul>
     </main>
   );
 };

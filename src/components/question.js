@@ -17,7 +17,6 @@ const Question = ({ q, full = false }) => {
   `)
     .allQuestions.nodes.filter(({ id }) => id === q)
     .pop();
-  console.log(full);
 
   return (
     <div>
